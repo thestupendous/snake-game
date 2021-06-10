@@ -1,13 +1,18 @@
 package definitions
-var M,N unit32
+var M,N uint32
 var Dir byte			//can have u,d,l,r - for up, down, left, right directions
-
+/*
+func Abra() int {
+	return 90
+}
+*/
 type Coords struct {
-	var x,y uint32
+	x uint32
+	y uint32
 }
 
 type Snake struct {
-	var tail []Coords
+	tail []Coords
 }
 
 func (s *Snake) Enqueue(newLoc Coords) Coords {
@@ -22,5 +27,4 @@ func (s *Snake) Dequeue() Coords {
 }
 
 
-var Board [M][N]Coords
-
+var Board [][]Coords
