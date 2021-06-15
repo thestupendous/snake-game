@@ -75,7 +75,7 @@ func getNextCell(coord d.Coords,dir byte,board myBoard) (d.Coords,bool) {
 		return res,false
 	}
 	if board[res.X][res.Y]!=" " && board[res.X][res.Y]!="Ø"{
-		d.GameOverReason = "Trying to eat yourself!!"
+		d.GameOverReason = "Trying to eat yourself?!"
 		return res,false
 	}
 	return res,true
@@ -217,7 +217,7 @@ func main() {
     }(ch)
 
 	counter := 0
-    for !lost {
+    for !lost && !won {
         select {
             case stdin, _ := <-ch:
 				counter+=1
@@ -240,6 +240,9 @@ func main() {
 
 	if lost {
 		fmt.Println("GAME OVER! ",d.GameOverReason)
+	}
+	if won {
+		fmt.Println("Hurray!!, You finished the game. You can try again with more speed of snake :)")
 	}
 	fmt.Println("your final Score : ",d.Score)
 
