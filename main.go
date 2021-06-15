@@ -93,16 +93,19 @@ func getDashBar(oldDir byte,newDir byte) string {
 	}
 	if m[oldDir]==m[newDir] {
 		if m[oldDir]=="u" || m[oldDir]=="d" {
-			return "|"
+			return "│"
 		}else if m[oldDir]=="l" || m[oldDir]=="r" {
-			return "-"
+			return "─"
 		}
 	} 
-	if m[oldDir] == "u" || m[oldDir] =="d" {
-		return "-"
-	}
-	if m[oldDir] == "r" || m[oldDir] == "l" {
-		return "|"
+	if m[oldDir] == "u" {
+		if m[newDir] == "l"{ return "┐" }else{  return "┌"}
+	} else if m[oldDir] =="d" {
+		if m[newDir] == "l" { return "┘"} else { return "└"}
+	}else if m[oldDir] == "l" {
+		if m[newDir] == "u" { return "└"} else { return "┌"}
+	} else {		//old dir is right
+		if m[newDir] == "u" { return "┘"} else { return "┐"}
 	}
 	return "L"
 }
@@ -174,7 +177,6 @@ func main() {
 
 	//game progression steps
 	d.Score = 0
-	fmt.Println("Initial Score: ",d.Score)
 	d.Dir = d.UserDir["d"]
 	d.OldDir = d.UserDir["d"]
 	// ch := ""
@@ -224,6 +226,9 @@ func main() {
 		fmt.Println("  Score : " + strconv.Itoa(d.Score))
     }
 
+	if lost {
+		fmt.Println("GAME OVER! You hit the walls too hard!! ")
+	}
 	fmt.Println("game final Score : ",d.Score)
 
 
