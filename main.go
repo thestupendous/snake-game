@@ -7,6 +7,7 @@ import (
 	"time"
 	"os"
 	"os/exec"
+	"strconv"
 )
 type myBoard [][]string
 func placeInitialSnake(s *d.Snake, board  myBoard) {
@@ -37,7 +38,6 @@ func (board myBoard) String() string {
 		out += "═"
 	}
 	out += "╝\n"
-	out +="  Score : " + string(d.Score) +"\n"
 	return out
 } 
 func placeFood(board myBoard) {
@@ -94,12 +94,10 @@ func getDashBar(oldDir byte,newDir byte) string {
 	if m[oldDir]==m[newDir] {
 		if m[oldDir]=="u" || m[oldDir]=="d" {
 			return "|"
-		}
-	}else if m[oldDir]==m[newDir] {
-		if m[oldDir]=="l" || m[oldDir]=="r" {
+		}else if m[oldDir]=="l" || m[oldDir]=="r" {
 			return "-"
 		}
-	}
+	} 
 	if m[oldDir] == "u" || m[oldDir] =="d" {
 		return "-"
 	}
@@ -221,9 +219,9 @@ func main() {
 				//updateBoard(oldDir)
         }
         time.Sleep(time.Millisecond * 500)
-		fmt.Println("\033[H\033[2J")
+		fmt.Println("\033[H\033[2J")			//clear the screen
 		fmt.Println(board)						//printing board at every clock tick
-
+		fmt.Println("  Score : " + strconv.Itoa(d.Score))
     }
 
 	fmt.Println("game final Score : ",d.Score)
