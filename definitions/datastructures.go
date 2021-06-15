@@ -1,11 +1,16 @@
 package definitions
 var M,N uint32
 var Dir byte			//can have 0,1,2,3 - for up, down, left, right directions respectively
-/*
-func Abra() int {
-	return 90
+var OldDir byte			//can have 0,1,2,3 - for up, down, left, right directions respectively
+var FoodLoc Coords
+var Score int
+var UserDir = map[string]byte {
+	"w":0,
+	"s":1,
+	"a":2,
+	"d":3,
 }
-*/
+
 type Coords struct {
 	X uint32
 	Y uint32

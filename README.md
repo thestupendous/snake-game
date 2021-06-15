@@ -10,5 +10,9 @@ Just launch main.go file using -
 The game starts with snake in the middle and starts moving.
 
 ## How to play the game
-Use arrow keys to move the snake up, down, left or right
+Use WASD  keys to move the snake. ( W - up, S - down, A - left, D - right)
 ![Game image](/doc/images/game-image.png)
+
+
+## Quit the game
+Press Ctrl+C to quit the game. (You can also hit the walls to let the game end :) , you'll see the final score)
