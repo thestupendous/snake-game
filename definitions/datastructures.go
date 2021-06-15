@@ -4,6 +4,8 @@ var Dir byte			//can have 0,1,2,3 - for up, down, left, right directions respect
 var OldDir byte			//can have 0,1,2,3 - for up, down, left, right directions respectively
 var FoodLoc Coords
 var Score int
+var TickDelay int						//increasing this value in multiples of 100 makes game slower
+var GameOverReason string				//throwing out reason for your "game over"
 var UserDir = map[string]byte {
 	"w":0,
 	"s":1,

@@ -15,9 +15,9 @@ func placeInitialSnake(s *d.Snake, board  myBoard) {
 	midY := d.N / 2
 	_ = midX
 	_ = midY
-	s.Enqueue(d.Coords{midX-1,midY}) ; board[midX][midY-1]="-"
-	s.Enqueue(d.Coords{midX,midY})   ; board[midX][midY]="-"
-	s.Enqueue(d.Coords{midX+1,midY}) ; board[midX][midY+1]=">"
+	s.Enqueue(d.Coords{midX,midY-1}) ; board[midX][midY-1]="─"
+	s.Enqueue(d.Coords{midX,midY})   ; board[midX][midY]="─"
+	s.Enqueue(d.Coords{midX,midY+1}) ; board[midX][midY+1]=">"
 	// fmt.Println("len of snake after initialising ",len(s.Tail))
 }
 func (board myBoard) String() string {
@@ -58,7 +58,7 @@ func gameWon(s d.Snake) bool {
 	return false
 }
 
-func getNextCell(coord d.Coords,dir byte) (d.Coords,bool) {
+func getNextCell(coord d.Coords,dir byte,board myBoard) (d.Coords,bool) {
 	res := coord
 	switch dir {
 	case 0:
@@ -71,6 +71,11 @@ func getNextCell(coord d.Coords,dir byte) (d.Coords,bool) {
 		res.Y+=1 ; break
 	}
 	if res.X >=d.M || res.Y>=d.N || res.X <0 || res.Y <0 {
+		d.GameOverReason = "You hit the wall too Hard!!"
+		return res,false
+	}
+	if board[res.X][res.Y]!=" " && board[res.X][res.Y]!="Ø"{
+		d.GameOverReason = "Trying to eat yourself!!"
 		return res,false
 	}
 	return res,true
@@ -109,11 +114,12 @@ func getDashBar(oldDir byte,newDir byte) string {
 	}
 	return "L"
 }
+//----------------------important function here----------------------------------------------
 func updateBoard(board myBoard, snake *d.Snake,won *bool, lost *bool) {
 	// fmt.Println("board updated")
 	// fmt.Println("len of Snake ",len(snake.Tail))
 	last := int(len(snake.Tail) - 1)
-	newCell , cont:= getNextCell(snake.Tail[last],d.Dir)
+	newCell , cont:= getNextCell(snake.Tail[last],d.Dir, board)
 	if !cont{
 			// game is lost
 			*lost = true
@@ -121,6 +127,10 @@ func updateBoard(board myBoard, snake *d.Snake,won *bool, lost *bool) {
 	}
 	var newHead=newHead(d.Dir)
 	snake.Enqueue(newCell)
+	if len(snake.Tail) >= int( int(d.M)*int(d.N) - 5 )  {
+		*won = true
+		return
+	}
 	last = len(snake.Tail) - 1
 	board[snake.Tail[last].X][snake.Tail[last].Y] = newHead
 	board[snake.Tail[last-1].X][snake.Tail[last-1].Y] = getDashBar(d.OldDir,d.Dir)
@@ -149,6 +159,8 @@ func main() {
 	won,lost := false, false
 	//defining dimensions of board
 	d.M,d.N = 20,40
+	//defining game speed
+	d.TickDelay = 200
 	//defining empty board of M,N dimensions
 	var board myBoard
 	board = make([][]string,d.M)
@@ -209,7 +221,7 @@ func main() {
         select {
             case stdin, _ := <-ch:
 				counter+=1
-                fmt.Println("Keys pressed: ", stdin,"\n Moves : ",counter)
+                fmt.Println("Moves : ",counter,"\nKey pressed: ", stdin)
 					//updateBoard(newDir)  //update snake, placefood, lost, won
 					d.Dir = d.UserDir[stdin]
 					checknCorrectWrongDir()
@@ -220,16 +232,16 @@ func main() {
 					updateBoard(board,&sn,&won,&lost)
 				//updateBoard(oldDir)
         }
-        time.Sleep(time.Millisecond * 500)
+        time.Sleep(time.Millisecond * time.Duration(d.TickDelay))
 		fmt.Println("\033[H\033[2J")			//clear the screen
 		fmt.Println(board)						//printing board at every clock tick
 		fmt.Println("  Score : " + strconv.Itoa(d.Score))
     }
 
 	if lost {
-		fmt.Println("GAME OVER! You hit the walls too hard!! ")
+		fmt.Println("GAME OVER! ",d.GameOverReason)
 	}
-	fmt.Println("game final Score : ",d.Score)
+	fmt.Println("your final Score : ",d.Score)
 
 
 }

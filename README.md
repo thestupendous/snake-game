@@ -13,6 +13,9 @@ The game starts with snake in the middle and starts moving.
 Use WASD  keys to move the snake. ( W - up, S - down, A - left, D - right)
 ![Game image](/doc/images/game-image.png)
 
+## Scoring
+You get 5 points for each food item eaten. Make sure to beat your older scores!
 
 ## Quit the game
 Press Ctrl+C to quit the game. (You can also hit the walls to let the game end :) , you'll see the final score)
+
