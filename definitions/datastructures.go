@@ -1,8 +1,8 @@
 package definitions
 
-var M,N uint32
-var Dir byte			//can have 0,1,2,3 - for up, down, left, right directions respectively
-var OldDir byte			//can have 0,1,2,3 - for up, down, left, right directions respectively
+var M,N uint32							//game board dimensions
+var Dir byte							//can have 0,1,2,3 - for up, down, left, right directions respectively
+var OldDir byte							//can have 0,1,2,3 - for up, down, left, right directions respectively
 var FoodLoc Coords
 type MyBoard [][]string					//Game board
 var Score int
@@ -13,6 +13,10 @@ var UserDir = map[string]byte {
 	"s":1,
 	"a":2,
 	"d":3,
+	"W":0,
+	"S":1,
+	"A":2,
+	"D":3,
 }
 func (board MyBoard) String() string {
 	out:= "╔"

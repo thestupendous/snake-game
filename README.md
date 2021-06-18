@@ -25,3 +25,6 @@ some variables in the main.go file, as shown below
 - Snake speed - It can be controlled by editing the d.TickDelay variable. Its default value is 200, the more the value, slower the game becomes. 
 - Game Board Dimensions - The board length and breadths can be changed by updating d.M (height) and d.N (width) variables in main function. The default values for width and height are 40 and 20 respectively.
 
+
+## References
+ - This game is built from scratch, no external resources are used. Still, some help is taken for inputting keypresses, without pressing enter, using this stackoverflow thread - https://stackoverflow.com/questions/54422309/how-to-catch-keypress-without-enter-in-golang-loop
