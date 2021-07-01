@@ -9,6 +9,8 @@ import (
 )
 
 func main() {
+	continueGame := "y"
+	for continueGame!="n"{
 	won,lost := false, false
 	//setting dimensions of board
 	d.M,d.N = 20,40
@@ -88,6 +90,12 @@ func main() {
 		fmt.Println("Hurray!!, You finished the game. You can try again with more speed of snake :)")
 	}
 	fmt.Println("your final Score : ",d.Score)
+
+	fmt.Println("\033[H\033[2J")
+	fmt.Print("would you like to continue playing? (y/n) : ")
+	fmt.Scan(&continueGame)
+	fmt.Println()
+}
 
 
 }
