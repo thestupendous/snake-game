@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  namespace: snake-go
+  name: snake-go-deployment
+  labels:
+    app: snake-game
+
+spec:
+  selector:
+    matchLabels:
+      app: snake-game
+
+
+  template:
+    metadata:
+      name: snake-go-container
+      labels:
+        app: snake-game
+    spec:
+      containers:
+        - name: snake-go-container
+          image: thestupendous/snake-go:1
+          

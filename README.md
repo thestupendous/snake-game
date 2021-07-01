@@ -9,6 +9,32 @@ Just launch main.go file using -
 
 The game starts with snake in the middle and starts moving.
 
+## Deploying on Docker
+For deploying the game on docker, 
+- Make sure docker is installed
+- in the home directory run 
+  - `docker build -t snake-go .`
+  - `docker run -i --tty --name snake-game snake-go`
+
+### Removal 
+For deleting game on docker, do
+- `docker rm -f snake-game`
+- `docker rmi -f snake-go`
+
+## Deploying on Kubernetes
+For deploying on k8s, 
+- make sure kubernetes is installed and you are able to access kubectl or kubeadm command
+- in home directory, run
+  - `./k8s-deploy/one-click-deploy.sh`
+- list your pod which comes up after a few seconds. Wait till it appears
+  - `kubectl get po -n snake-go `
+- after pod comes up, note down its name in previous command and run this
+  - `kubectl exec -n snake-go -stdin --tty <pod-name> go run main.go`
+
+### Removal from kubernetes
+For deleting all k8s resources, in home directory, run
+- `./k8s-deploy/delete-resource.sh `
+
 ## How to play the game
 Use WASD  keys to move the snake. ( W - up, S - down, A - left, D - right)
 ![Game image](/doc/images/game-image.png)
