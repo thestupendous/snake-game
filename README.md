@@ -5,9 +5,9 @@ The classic snake game we have played in feature phones. The snake hunting food 
 Only linux platforms are supported. Windows support is coming soon :)
   
 ## How to Launch
-Just launch main.go file using -
+In the downloaded and extracted folder run -
 
-> go run main.go
+> go run .
 
 The game starts with snake in the middle and starts moving.
 
