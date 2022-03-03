@@ -1,6 +1,8 @@
 # Snake Game
 The classic snake game we have played in feature phones. The snake hunting food and growing with every time it eats. The game is implemented in golang
 
+##Supported Platforms
+Only linux platforms are supported. Windows support is coming soon :)
   
 ## How to Launch
 Just launch main.go file using -
